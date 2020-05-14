@@ -12,11 +12,12 @@ export class Tab2Page implements OnInit {
 
   isLoading = true;
   date = new Date();
-  spend: number;
-  budget: number;
-  remainder: number;
+  spend = 0;
+  budget = 0;
+  remainder = 0;
 
   spendSub: Subscription;
+  budgetSub: Subscription;
 
   constructor(
     private spendSrv: SpendService,
@@ -28,7 +29,13 @@ export class Tab2Page implements OnInit {
       this.isLoading = false;
       this.spend = sum;
     })
+    this.budgetSub = this.spendSrv.budgetChanged.subscribe(b => {
+      this.isLoading = false;
+      this.budget = b;
+      this.remainder = this.spend - this.budget;
+    })
     this.spendSrv.getSumOfSpend(this.datesSrv.getMonth(this.date));
+    this.spendSrv.getBudget();
   }
 
   onSpendClicked() {

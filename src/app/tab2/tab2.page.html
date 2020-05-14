@@ -16,7 +16,7 @@
             <ion-card-title color="primary">Current Month</ion-card-title>
           </ion-card-header>
           <ion-card-content>
-            Total Spend: <span *ngIf="!isLoading" class="value">{{ spend }}</span>
+            Total Spend: <span *ngIf="!isLoading" class="value">{{ spend | currency }}</span>
             <span *ngIf="isLoading" class="ion-text-center ion-padding">
               <ion-spinner color="primary"></ion-spinner>
             </span>
@@ -31,13 +31,13 @@
             <ion-card-subtitle color="secondary">Monthly Budget</ion-card-subtitle>
           </ion-card-header>
           <ion-card-content>
-            Budget: <span *ngIf="!isLoading" class="value">{{ budget }}</span>
+            Budget: <span *ngIf="!isLoading" class="value">{{ (budget ? budget : 0) | currency }}</span>
             <span *ngIf="isLoading" class="ion-text-center ion-padding">
               <ion-spinner color="primary"></ion-spinner>
             </span>
           </ion-card-content>
           <ion-card-content>
-            Remainder: <span *ngIf="!isLoading" class="value">{{ remainder }}</span>
+            Remainder: <span *ngIf="!isLoading" class="value">{{ remainder | currency }}</span>
             <span *ngIf="isLoading" class="ion-text-center ion-padding">
               <ion-spinner color="primary"></ion-spinner>
             </span>

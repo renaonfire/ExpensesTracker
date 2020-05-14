@@ -22,6 +22,7 @@ export class SpendService {
 
   sumOfSpend: number;
   sumChanged = new Subject<number>();
+  budgetChanged = new Subject<number>();
 
   spendRef = firebase.database().ref('spend');
   budgetRef = firebase.database().ref('budget');
@@ -42,6 +43,16 @@ export class SpendService {
 
   }
 
+  onAddBudget(amount: number) {
+    let generatedId = this.budgetRef.push().key
+    const newBudget = new BudgetModel(
+      generatedId,
+      amount
+    );
+    this.budgetRef.child(generatedId).set(newBudget);
+    return this._budgetData.next([newBudget]);
+  }
+
   getSumOfSpend(month: string) {
     this.spendRef.child(month).once('value').then(resData => {
       let spendValues = [];
@@ -53,6 +64,22 @@ export class SpendService {
       this.sumOfSpend = spendValues.reduce((a, b) => a + b) as number;
       this.sumChanged.next(this.sumOfSpend);
       return this.sumOfSpend;
+    }
+    )
+  }
+
+  getBudget() {
+    this.budgetRef.once('value').then(resData => {
+      let budget: number;
+      for (const key in resData.val()) {
+        if(resData.val().hasOwnProperty(key)) {
+          budget = +resData.val()[key].budget;
+        } else {
+          budget = 0;
+        }
+      }
+      this.budgetChanged.next(budget);
+      return budget;
     }
     )
   }

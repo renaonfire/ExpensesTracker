@@ -1,4 +1,6 @@
 import { Component } from '@angular/core';
+import { SpendService } from '../spend/spend.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-tab3',
@@ -7,6 +9,16 @@ import { Component } from '@angular/core';
 })
 export class Tab3Page {
 
-  constructor() {}
+  budget; 
+
+  constructor(
+    private spendSrv: SpendService,
+    private router: Router
+  ) {}
+
+  onSaveBudget() {
+    this.spendSrv.onAddBudget(this.budget);
+    this.router.navigateByUrl('tabs/tab2');
+  }
 
 }
