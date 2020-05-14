@@ -13,6 +13,16 @@
   <ion-grid>
     <ion-row>
       <ion-col>
+        <ion-datetime [(ngModel)]="selectedDate" (ionChange)="onDateChanged(selectedDate)"></ion-datetime>
+      </ion-col>
+    </ion-row>
+    <ion-row *ngIf="!loadedSpend || loadedSpend.length <= 0">
+      <ion-col>
+        <p>No Transactions to Show!</p>
+      </ion-col>
+    </ion-row>
+    <ion-row *ngIf="loadedSpend || loadedSpend.length > 0">
+      <ion-col>
         <ion-list>
           <ion-item-sliding *ngFor="let s of loadedSpend" #slidingSpend>
             <ion-item>
