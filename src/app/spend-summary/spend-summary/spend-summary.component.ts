@@ -38,11 +38,13 @@ export class SpendSummaryComponent implements OnInit {
   }
 
   onDeleteSpend(id: string, slidingEl: IonItemSliding) {
-
+    this.spendSrv.onDeleteSpendItem(id, this.month, slidingEl);
+    
   }
 
   onDateChanged(month: Date) {
     let newMonth = this.dateSrv.getMonth(month);
+    this.month = newMonth;
     this.spendSrv.getSpendItems(newMonth);
   }
 

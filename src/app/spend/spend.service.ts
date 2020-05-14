@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { BehaviorSubject, Subject } from 'rxjs';
 import { SpendModel, BudgetModel } from './spend.model';
 import * as firebase from 'firebase'
+import { IonItemSliding } from '@ionic/angular';
 
 @Injectable({
   providedIn: 'root'
@@ -101,5 +102,10 @@ export class SpendService {
       this.spendChanged.next(spendItems);
       return spendItems;
     })
+  }
+
+  onDeleteSpendItem(id: string, month: string, slidingEl: IonItemSliding) {
+    this.spendRef.child(month).child(id).remove();
+    this.getSpendItems(month);
   }
 }
