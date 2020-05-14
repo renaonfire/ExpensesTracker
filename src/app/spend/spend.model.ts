@@ -6,3 +6,10 @@ export class SpendModel {
         public month: string
     ){}
 }
+
+export class BudgetModel {
+    constructor(
+        public id: string,
+        public budget: number
+    ) {}
+}

@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
-import { BehaviorSubject } from 'rxjs';
-import { SpendModel } from './spend.model';
+import { BehaviorSubject, Subject } from 'rxjs';
+import { SpendModel, BudgetModel } from './spend.model';
 import * as firebase from 'firebase'
 
 @Injectable({
@@ -10,11 +10,21 @@ export class SpendService {
 
   private _spendData = new BehaviorSubject<SpendModel[]>([]);
 
+  private _budgetData = new BehaviorSubject<BudgetModel[]>([]);
+
   get spendData() {
     return this._spendData.asObservable();
   } 
 
+  get budgetData() {
+    return this._budgetData.asObservable();
+  }
+
+  sumOfSpend: number;
+  sumChanged = new Subject<number>();
+
   spendRef = firebase.database().ref('spend');
+  budgetRef = firebase.database().ref('budget');
 
   constructor(
   ) { }
@@ -30,5 +40,20 @@ export class SpendService {
     this.spendRef.child(month).child(generatedId).set(newSpend);
     return this._spendData.next([newSpend]);
 
+  }
+
+  getSumOfSpend(month: string) {
+    this.spendRef.child(month).once('value').then(resData => {
+      let spendValues = [];
+      for (const key in resData.val()) {
+        if(resData.val().hasOwnProperty(key)) {
+          spendValues.push(+resData.val()[key].amount);
+        }
+      }
+      this.sumOfSpend = spendValues.reduce((a, b) => a + b) as number;
+      this.sumChanged.next(this.sumOfSpend);
+      return this.sumOfSpend;
+    }
+    )
   }
 }

@@ -1,17 +1,49 @@
 <ion-header [translucent]="true">
   <ion-toolbar>
     <ion-title>
-      Tab 2
+      Summarry 
     </ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">Tab 2</ion-title>
-    </ion-toolbar>
-  </ion-header>
-
-  <app-explore-container name="Tab 2 page"></app-explore-container>
+  <ion-grid>
+    <ion-row>
+      <ion-col>
+        <ion-card (click)="onSpendClicked()">
+          <ion-card-header>
+            <ion-card-subtitle color="secondary">Spend Summary</ion-card-subtitle>
+            <ion-card-title color="primary">Current Month</ion-card-title>
+          </ion-card-header>
+          <ion-card-content>
+            Total Spend: <span *ngIf="!isLoading" class="value">{{ spend }}</span>
+            <span *ngIf="isLoading" class="ion-text-center ion-padding">
+              <ion-spinner color="primary"></ion-spinner>
+            </span>
+          </ion-card-content>
+        </ion-card>
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col>
+        <ion-card (click)="onBudgetClicked()">
+          <ion-card-header>
+            <ion-card-subtitle color="secondary">Monthly Budget</ion-card-subtitle>
+          </ion-card-header>
+          <ion-card-content>
+            Budget: <span *ngIf="!isLoading" class="value">{{ budget }}</span>
+            <span *ngIf="isLoading" class="ion-text-center ion-padding">
+              <ion-spinner color="primary"></ion-spinner>
+            </span>
+          </ion-card-content>
+          <ion-card-content>
+            Remainder: <span *ngIf="!isLoading" class="value">{{ remainder }}</span>
+            <span *ngIf="isLoading" class="ion-text-center ion-padding">
+              <ion-spinner color="primary"></ion-spinner>
+            </span>
+          </ion-card-content>
+        </ion-card>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
 </ion-content>
