@@ -2,6 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import { Subscription } from 'rxjs';
 import { SpendService } from '../spend/spend.service';
 import { DatesService } from '../spend/dates.service';
+import { ModalController } from '@ionic/angular';
+import { SpendSummaryComponent } from '../spend-summary/spend-summary/spend-summary.component';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-tab2',
@@ -21,7 +24,9 @@ export class Tab2Page implements OnInit {
 
   constructor(
     private spendSrv: SpendService,
-    private datesSrv: DatesService
+    private datesSrv: DatesService,
+    private modalCtrl: ModalController,
+    private router: Router
   ) {}
 
   ngOnInit() {
@@ -39,11 +44,16 @@ export class Tab2Page implements OnInit {
   }
 
   onSpendClicked() {
-
+    this.modalCtrl.create({
+       component: SpendSummaryComponent,
+       componentProps: {month: this.datesSrv.getMonth(this.date)}
+    }).then(modalEl => 
+      modalEl.present()
+    );
   }
 
   onBudgetClicked() {
-
+    this.router.navigateByUrl('tabs/tab3');
   }
 
 }
