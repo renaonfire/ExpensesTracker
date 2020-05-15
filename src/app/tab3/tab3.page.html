@@ -8,22 +8,21 @@
 
 <ion-content [fullscreen]="true">
   <ion-grid>
-    <ion-row>
-      <ion-col>
-        <ion-item lines="none">
-          <ion-icon name="cash"></ion-icon>
-          <ion-label position="floating">Set Budget</ion-label>
-          <ion-input [(ngModel)]="budget"></ion-input>
-        </ion-item>
-      </ion-col>
-    </ion-row>
-    <ion-row>
-      <ion-col>
-        <ion-button (click)="onSaveBudget()">
-          Save
-        </ion-button>
-      </ion-col>
-    </ion-row>
-  </ion-grid>
-
+      <ion-row class="row-container">
+          <div class="item">
+            <div class="fields">
+              <ion-icon color="primary" name="cash"></ion-icon>
+              <ion-label>Set Budget</ion-label>
+              <ion-input [(ngModel)]="budget" [placeholder]="(budget ? budget : 0) | currency" clearInput={{true}}></ion-input>
+            </div>
+          </div>
+      </ion-row>
+      <ion-row>
+        <ion-col>
+          <ion-button expand="block" (click)="onSaveBudget()">
+            Save
+          </ion-button>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
 </ion-content>

@@ -1,0 +1,33 @@
+ion-grid {
+    height: 100%;
+    padding: 2rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+ion-icon {
+    padding-right: 1rem;
+}
+
+ion-input {
+    text-align: end;
+}
+
+.row-container {
+    box-shadow: rgba(0, 0, 0, 0.12) 0px 4px 16px;
+    border-radius: 0.5rem;
+}
+
+.item {
+    padding: 5px;
+
+    .fields {
+    display: flex;
+    align-items: center;
+    }
+
+    ion-icon {
+    font-size: 25px;
+    }
+}

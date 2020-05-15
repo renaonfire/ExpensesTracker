@@ -12,7 +12,7 @@
       <ion-col>
         <ion-card (click)="onSpendClicked()">
           <ion-card-header>
-            <ion-card-subtitle color="secondary">Spend Summary</ion-card-subtitle>
+            <ion-card-subtitle color="tertiary">Spend Summary</ion-card-subtitle>
             <ion-card-title color="primary">Current Month</ion-card-title>
           </ion-card-header>
           <ion-card-content>
@@ -28,7 +28,7 @@
       <ion-col>
         <ion-card (click)="onBudgetClicked()">
           <ion-card-header>
-            <ion-card-subtitle color="secondary">Monthly Budget</ion-card-subtitle>
+            <ion-card-subtitle color="tertiary">Monthly Budget</ion-card-subtitle>
           </ion-card-header>
           <ion-card-content>
             Budget: <span *ngIf="!isLoading" class="value">{{ (budget ? budget : 0) | currency }}</span>

@@ -34,12 +34,15 @@ export class SpendService {
 
   onAdd(amount: number, date: Date, month: string) {
     let generatedId = this.spendRef.push().key
+    console.log(date);
     const newSpend = new SpendModel(
       generatedId,
       amount, 
       date,
       month
     );
+    console.log(newSpend);
+    
     this.spendRef.child(month).child(generatedId).set(newSpend);
     return this._spendData.next([newSpend]);
 

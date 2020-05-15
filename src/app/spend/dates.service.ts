@@ -13,4 +13,12 @@ import { Injectable } from '@angular/core';
         let month = newDate.getMonth();
         return this.months[month];
     }
+
+    getTodaysDate() {
+        let date = new Date()
+        let day = date.getDate();
+        let month = date.getMonth();
+        let year = date.getFullYear();
+        return `${day} ${this.months[month]} ${year}`;
+    }
   }
