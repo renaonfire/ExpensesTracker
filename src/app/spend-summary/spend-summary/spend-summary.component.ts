@@ -2,7 +2,7 @@ import { Component, OnInit, Input } from '@angular/core';
 import { SpendModel } from 'src/app/spend/spend.model';
 import { SpendService } from 'src/app/spend/spend.service';
 import { Subscription } from 'rxjs';
-import { IonItemSliding } from '@ionic/angular';
+import { IonItemSliding, ModalController } from '@ionic/angular';
 import { DatesService } from 'src/app/spend/dates.service';
 
 @Component({
@@ -22,7 +22,8 @@ export class SpendSummaryComponent implements OnInit {
 
   constructor(
     private spendSrv: SpendService,
-    private dateSrv: DatesService
+    private dateSrv: DatesService,
+    private modalCtrl: ModalController
   ) { }
   
   ngOnInit() {
@@ -35,6 +36,12 @@ export class SpendSummaryComponent implements OnInit {
 
   ionViewWillEnter() {
   
+  }
+
+  onCloseModal() {
+    this.modalCtrl.dismiss({
+      'dismissed': true
+    }) 
   }
 
   onDeleteSpend(id: string, slidingEl: IonItemSliding) {

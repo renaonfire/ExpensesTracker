@@ -56,4 +56,8 @@ export class Tab2Page implements OnInit {
     this.router.navigateByUrl('tabs/tab3');
   }
 
+  ionViewWillEnter() {
+    this.ngOnInit();
+  }
+
 }

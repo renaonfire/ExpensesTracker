@@ -9,7 +9,6 @@ export class SpendModel {
 
 export class BudgetModel {
     constructor(
-        public id: string,
         public budget: number
     ) {}
 }

@@ -49,12 +49,10 @@ export class SpendService {
   }
 
   onAddBudget(amount: number) {
-    let generatedId = this.budgetRef.push().key
     const newBudget = new BudgetModel(
-      generatedId,
       amount
     );
-    this.budgetRef.child(generatedId).set(newBudget);
+    this.budgetRef.set(newBudget);
     return this._budgetData.next([newBudget]);
   }
 
@@ -76,13 +74,11 @@ export class SpendService {
   getBudget() {
     this.budgetRef.once('value').then(resData => {
       let budget: number;
-      for (const key in resData.val()) {
-        if(resData.val().hasOwnProperty(key)) {
-          budget = +resData.val()[key].budget;
+        if(resData.val()) {
+          budget = +resData.val().budget;
         } else {
           budget = 0;
         }
-      }
       this.budgetChanged.next(budget);
       return budget;
     }
