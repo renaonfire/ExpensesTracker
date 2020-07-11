@@ -29,9 +29,6 @@ export class SpendService {
   spendRef = firebase.database().ref('spend');
   budgetRef = firebase.database().ref('budget');
 
-  constructor(
-  ) { }
-
   onAdd(amount: number, date: Date, month: string) {
     let generatedId = this.spendRef.push().key
     console.log(date);
